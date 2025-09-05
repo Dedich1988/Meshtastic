@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подключение DHT22 к Lilygo T3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c5530;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .connection-diagram {
+            background: #e8f5e8;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        .connection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .connection-table th,
+        .connection-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+        
+        .connection-table th {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .dht22-pin {
+            background: #e3f2fd;
+            font-weight: bold;
+        }
+        
+        .t3-pin {
+            background: #fff3e0;
+            font-weight: bold;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            margin: 15px 0;
+            padding: 15px 20px;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .step-number {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 18px;
+        }
+        
+        .available-pins {
+            background: #e8f4fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .pin-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .pin-item {
+            background: #007bff;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌡️ Подключение DHT22 к Lilygo T3 v1.6</h1>
+        
+        <div class="connection-diagram">
+            <h3>📋 Схема подключения</h3>
+            <table class="connection-table">
+                <thead>
+                    <tr>
+                        <th>DHT22 пин</th>
+                        <th>Назначение</th>
+                        <th>T3 v1.6 пин</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="dht22-pin">VCC</td>
+                        <td>Питание</td>
+                        <td class="t3-pin">3V (правый ряд)</td>
+                        <td>3.3V питание</td>
+                    </tr>
+                    <tr>
+                        <td class="dht22-pin">GND</td>
+                        <td>Земля</td>
+                        <td class="t3-pin">GND (правый ряд)</td>
+                        <td>Общая земля</td>
+                    </tr>
+                    <tr>
+                        <td class="dht22-pin">DATA</td>
+                        <td>Данные</td>
+                        <td class="t3-pin">IO13</td>
+                        <td>Цифровой пин для данных</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="available-pins">
+            <h3>🔌 Доступные GPIO пины для датчиков</h3>
+            <p>На вашей плате T3 v1.6 доступны следующие GPIO пины:</p>
+            <div class="pin-list">
+                <div class="pin-item">IO2</div>
+                <div class="pin-item">IO4</div>
+                <div class="pin-item">IO12</div>
+                <div class="pin-item">IO13</div>
+                <div class="pin-item">IO14</div>
+                <div class="pin-item">IO15</div>
+                <div class="pin-item">IO25</div>
+                <div class="pin-item">IO26</div>
+                <div class="pin-item">IO27</div>
+            </div>
+            <p><strong>Рекомендую использовать IO13</strong> для первого датчика DHT22</p>
+        </div>
+        
+        <div class="warning">
+            <h3>⚠️ Важные замечания</h3>
+            <ul>
+                <li>Используйте только <strong>3.3V</strong>, не 5V!</li>
+                <li>Проверьте правильность подключения перед включением</li>
+                <li>DHT22 может потреблять до 2.5mA, что безопасно для T3</li>
+                <li>Избегайте пинов IO0, IO22, IO23 - они используются системой</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">Шаг 1:</div>
+            <p>Отключите питание T3 (отсоедините USB)</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">Шаг 2:</div>
+            <p>Подключите провода согласно схеме выше</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">Шаг 3:</div>
+            <p>Проверьте подключение дважды</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">Шаг 4:</div>
+            <p>Включите T3 и настройте телеметрию в Meshtastic</p>
+        </div>
+        
+        <div class="success">
+            <h3>✅ Настройка в Meshtastic</h3>
+            <p>После подключения нужно будет настроить телеметрию:</p>
+            <ol>
+                <li>Откройте приложение Meshtastic</li>
+                <li>Перейдите в Settings → Module Configuration</li>
+                <li>Найдите "Telemetry Module"</li>
+                <li>Включите модуль и настройте интервал отправки</li>
+                <li>Укажите пин IO13 как источник данных датчика</li>
+            </ol>
+        </div>
+        
+        <div class="code-block">
+            <strong>Проверка в Serial Monitor:</strong><br>
+            После подключения датчика, в логах должны появиться сообщения:<br>
+            <code>DHT22 sensor detected on pin 13</code><br>
+            <code>Temperature: 23.5°C, Humidity: 65.2%</code>
+        </div>
+    </div>
+</body>
+</html>
