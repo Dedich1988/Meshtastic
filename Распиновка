@@ -235,7 +235,7 @@
         <div class="code-block">
             <strong>Проверка в Serial Monitor:</strong><br>
             После подключения датчика, в логах должны появиться сообщения:<br>
-            <code>DHT22 sensor detected on pin 13</code><br>
+            <code>DHT22 sensor detected on pin 26</code><br>
             <code>Temperature: 23.5°C, Humidity: 65.2%</code>
         </div>
     </div>
