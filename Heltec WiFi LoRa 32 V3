@@ -1,7 +1,37 @@
-Основные характеристики:
-
-Чип: ESP32-S3FN8
-LoRa чип: SX1262
-Частота: 863-928 МГц (подходит для Беларуси - 868 МГц)
-Дисплей: 0.96" OLED
-USB-UART мост: CP2102
+Разъём,Пин #,Физический пин,Назначение (GPIO/Функция),Цвет/Категория,Примечание для Meshtastic/Умный дом
+"J3 (левый, снизу вверх)",1,GND,GND,Чёрный,Земля
+,2,3V3,3V3,Красный,Питание 3.3V
+,3,3V3,3V3,Красный,Питание 3.3V
+,4,GND,GND,Чёрный,Земля
+,5,GPIO46,FSPIQ (SPI MOSI),Фиолетовый (GPIO/ADC),"Для SPI-датчиков (e.g., дисплей, сенсоры)"
+,6,GPIO4,MTDI,Фиолетовый,GPIO для реле/датчиков
+,7,GPIO2,MTDO,Фиолетовый,GPIO
+,8,GPIO41,MTMS,Фиолетовый,"I2C SCL (для Meshtastic) — подключайте I2C-устройства (e.g., BME280 для погоды)"
+,9,GPIO40,MTCK,Фиолетовый,GPIO/ADC
+,10,GPIO39,GPIO39,Фиолетовый,GPIO/ADC
+,11,GPIO38,SUBWP,Фиолетовый,GPIO
+,12,GPIO37,VBAT_READ (ADC),Зелёный (ADC),Чтение напряжения батареи
+,13,GPIO36,TOUCH1 (ADC_CH1),Зелёный,Сенсорный ввод/ADC
+,14,GPIO35,TOUCH2 (ADC_CH2),Зелёный,"ADC для аналоговых датчиков (e.g., освещённость)"
+,15,GPIO34,TOUCH3 (ADC_CH3),Зелёный,ADC
+,16,GPIO33,TOUCH4 (ADC_CH4),Зелёный,ADC
+,17,GPIO21,TOUCH5 (ADC_CH5),Зелёный,ADC
+,18,GPIO20,TOUCH6 (ADC_CH6),Зелёный,ADC
+"J2 (правый, снизу вверх)",1,GND,GND,Чёрный,Земля
+,2,5V,5V,Красный,Питание 5V (от USB)
+,3,Ve,Ve (VBUS),Красный,Питание
+,4,GND,GND,Чёрный,Земля
+,5,U0RXD,GPIO44 (U0RXD),Синий (Serial),UART RX для отладки/серийной связи
+,6,U0TXD,GPIO43 (U0TXD),Синий,UART TX
+,7,CP2102_TX,GPIO10 (CP2102_TX),Синий,Встроенный UART
+,8,CP2102_RX,GPIO9 (CP2102_RX),Синий,Встроенный UART
+,9,GPIO8,USER_SW,Фиолетовый,Кнопка пользователя (для Meshtastic-команд)
+,10,GPIO0,SPI0,Фиолетовый,Boot/Reset пин
+,11,GPIO1,SPI1,Фиолетовый,GPIO
+,12,GPIO3,SPI2,Фиолетовый,GPIO
+,13,GPIO7,SPI3,Фиолетовый,GPIO
+,14,GPIO6,OLED_RST,Фиолетовый,Reset OLED-дисплея
+,15,GPIO48,U1CTS (OLED_SCL?),Синий,I2C/UART
+,16,GPIO17,U1RTS (OLED_SDA?),Синий,I2C SDA (для Meshtastic) — основной для сенсоров
+,17,GPIO18,U1TXD (ADC_CH2),Синий/Зелёный,UART/ADC
+,18,GPIO19,U1RXD (CLK_OUT),Синий,UART
